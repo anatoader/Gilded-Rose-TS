@@ -11,20 +11,20 @@ export class Item {
 }
 
 function getBackstagePassesQualityIncrement(item: Item): number {
-    let increment: number = 1;
     if (item.sellIn <= 5) {
-        increment = 3;
+        return 3;
     } else if (item.sellIn <= 10) {
-        increment  = 2;
+        return 2;
     }
 
-    return increment;
+    return 1;
 }
 
 function getNormalItemQualityDecrement(item: Item):number {
     let decrement: number = (item.sellIn <= 0) ? 2 : 1;
-    if (item.name == 'Conjured Mana Cake')
+    if (item.name == 'Conjured Mana Cake') {
         decrement *= 2;
+    }
 
     return decrement;
 }
@@ -51,7 +51,7 @@ export class GildedRose {
                             item.quality += getBackstagePassesQualityIncrement(item);
                         }
                     } else {
-                        item.quality++;
+                        item.quality += (item.sellIn <= 0) ? 2 : 1;
                     }
 
                     item.quality = Math.min(item.quality, 50);

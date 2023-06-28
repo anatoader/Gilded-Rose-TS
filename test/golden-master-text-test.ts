@@ -35,10 +35,10 @@ describe('A Golden Master Test', function (): void {
             up_item_backstage_passes_1, up_item_backstage_passes_2, up_item_backstage_passes_3, up_item_backstage_passes_4,
             up_item_zero_quality];
 
-        // Where
+        // When
         const updatedItems = gildedRose.updateQuality();
 
-        // When
+        // Then
         expect(updatedItems).to.deep.equal(expectedItems);
     })
 
