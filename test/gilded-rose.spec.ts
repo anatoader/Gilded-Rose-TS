@@ -6,8 +6,8 @@ const GildedRose = gilded_rose.GildedRose;
 
 describe('Gilded Rose Unit Tests', function () {
     // sellIn tests
-    it('decrease sellIn common item', function() {
-        const gildedRose = new GildedRose([new Item('Common item', 5, 0)]);
+    it('decrease sellIn normal item', function() {
+        const gildedRose = new GildedRose([new Item('Normal item', 5, 0)]);
         const updatedItems = gildedRose.updateQuality();
 
         expect(updatedItems[0].sellIn).to.equal(4);
@@ -35,15 +35,15 @@ describe('Gilded Rose Unit Tests', function () {
     });
 
     // quality tests
-    it('nonnegative decreasing quality common item', function() {
-        const gildedRose = new GildedRose([new Item('Common item', 5, 0)]);
+    it('nonnegative decreasing quality normal item', function() {
+        const gildedRose = new GildedRose([new Item('Normal item', 5, 0)]);
         const updatedItems = gildedRose.updateQuality();
 
         expect(updatedItems[0].quality).to.equal(0);
     });
 
-    it('nonnegative decreasing quality common item past sell date', function() {
-        const gildedRose = new GildedRose([new Item('Common item', -1, 15)]);
+    it('nonnegative decreasing quality normal item past sell date', function() {
+        const gildedRose = new GildedRose([new Item('Normal item', -1, 15)]);
         const updatedItems = gildedRose.updateQuality();
 
         expect(updatedItems[0].quality).to.equal(13);
@@ -117,5 +117,28 @@ describe('Gilded Rose Unit Tests', function () {
 
         expect(updatedItems[0].quality).to.equal(14);
     });
+
+    // Part 3 - Conjured Mana Cake
+    it('decrease sellIn Conjured Mana Cake', function() {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', 5, 0)]);
+        const updatedItems = gildedRose.updateQuality();
+
+        expect(updatedItems[0].sellIn).to.equal(4);
+    });
+
+    it('decreasing quality Conjured Mana Cake (twice as fast)', function() {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', 5, 15)]);
+        const updatedItems = gildedRose.updateQuality();
+
+        expect(updatedItems[0].quality).to.equal(13);
+    });
+
+    it('nonnegative decreasing quality Conjured Mana Cake (twice as fast)', function() {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', 5, 1)]);
+        const updatedItems = gildedRose.updateQuality();
+
+        expect(updatedItems[0].quality).to.equal(0);
+    });
+
 
 });

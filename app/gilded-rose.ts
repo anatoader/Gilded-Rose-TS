@@ -23,6 +23,14 @@ function getBackstagePassesQualityIncrement(item: Item): number {
     return increment;
 }
 
+function getNormalItemDecrement(item: Item):number {
+    let decrement: number = (item.sellIn <= 0) ? 2 : 1;
+    if (item.name == 'Conjured Mana Cake')
+        decrement *= 2;
+
+    return decrement;
+}
+
 export class GildedRose {
     items: Array<Item>;
 
@@ -34,7 +42,7 @@ export class GildedRose {
         this.items.forEach(function (item:Item): void {
             if (item.name != 'Sulfuras, Hand of Ragnaros') {
                 if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
-                    item.quality -= (item.sellIn <= 0) ? 2 : 1;
+                    item.quality -= getNormalItemDecrement(item);
                     item.quality = Math.max(item.quality, 0);
 
                 } else {
@@ -51,7 +59,7 @@ export class GildedRose {
                     item.quality = Math.min(item.quality, 50);
                 }
 
-                item.sellIn = item.sellIn - 1;
+                item.sellIn--;
             }
         });
 
