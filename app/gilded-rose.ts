@@ -11,13 +11,11 @@ export class Item {
 }
 
 function getBackstagePassesQualityIncrement(item: Item): number {
-    let increment: number;
+    let increment: number = 1;
     if (item.sellIn <= 5) {
         increment = 3;
     } else if (item.sellIn <= 10) {
         increment  = 2;
-    } else {
-        increment = 1;
     }
 
     return increment;
